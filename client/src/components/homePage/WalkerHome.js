@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Button, Table } from "react-bootstrap";
 import * as sessionMgmt from "../../services/SessionHandler";
+import TopBar from "../TopBar";
+import history from "../../services/History";
 
 export default class WalkerHome extends Component {
     constructor(props) {
@@ -11,6 +13,10 @@ export default class WalkerHome extends Component {
     }
 
     componentDidMount() {
+        this.getAllJobs();
+    }
+
+    getAllJobs = () => {
         let self = this
         fetch('http://localhost:4000/jobs', {
         method: "GET",
@@ -21,6 +27,36 @@ export default class WalkerHome extends Component {
       })
       .then((res) => res.json())
       .then(jobs => self.setState({availableJobs: jobs}));
+    }
+
+    acceptJob = (jobId) => {
+        let self = this
+        fetch('http://localhost:4000/jobs/' + jobId, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        }
+      })
+      .then((res) => res.json())
+      .then(job => {
+          job.status = "ASSIGNED";
+          job.walker = sessionMgmt.getUserName();
+          fetch('http://localhost:4000/jobs/' + jobId, {
+                method: "PUT",
+                headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(job)
+            })
+            .then(res => res.json())
+            .then(updateJob => {
+                let jobsList = self.state.availableJobs.filter(job => job._id != jobId);
+                jobsList.push(job);
+                self.setState({availableJobs: jobsList});
+            })
+        });
     }
 
     render() {
@@ -40,7 +76,7 @@ export default class WalkerHome extends Component {
             </tr>
         );
 
-        const myJobs = this.state.availableJobs.filter(jobObj => jobObj.walker != sessionMgmt.getUserName());
+        const myJobs = this.state.availableJobs.filter(jobObj => jobObj.walker == sessionMgmt.getUserName());
         const myJobsContent = myJobs.map(jobs => 
             <tr key={jobs._id}>
                 <td>{jobs._id}</td>
@@ -53,36 +89,34 @@ export default class WalkerHome extends Component {
         );
         return (
         <Container>
-                <TopBar userName={sessionMgmt.getUserName()}/>
-                <h2>Welcome Walker: {sessionMgmt.getUserName()} !!!</h2>
-                <Table striped bordered hove>
-                <thead>
-                        <th>Job Id</th>
-                        <th>Owner Name</th>
-                        <th>Walker Name</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Status</th>
-                    </thead>
-                    <tbody>
-                        {myJobsContent}
-                    </tbody>
-                </Table>
+            <Table striped bordered hove>
+            <thead>
+                    <th>Job Id</th>
+                    <th>Owner Name</th>
+                    <th>Walker Name</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Status</th>
+                </thead>
+                <tbody>
+                    {myJobsContent}
+                </tbody>
+            </Table>
 
-                <Table striped bordered hove>
-                    <thead>
-                        <th>Job Id</th>
-                        <th>Owner Name</th>
-                        <th>Walker Name</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </thead>
-                    <tbody>
-                        {unassignedJobContent}
-                    </tbody>
-                </Table>
+            <Table striped bordered hove>
+                <thead>
+                    <th>Job Id</th>
+                    <th>Owner Name</th>
+                    <th>Walker Name</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    {unassignedJobContent}
+                </tbody>
+            </Table>
         </Container>
         );
     }

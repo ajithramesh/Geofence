@@ -8,6 +8,7 @@ import AdminHomePage from "./components/admin/AdminHomePage";
 import * as Socket from "./services/AppSocket";
 import UserProfile from "./components/profile/UserProfile";
 import MapView from "./components/mapView/MapView";
+import CreateJob from "./components/jobs/CreateJob";
 
 // Check how to send username param in the root link
 // Check if we can work on the history link
@@ -22,6 +23,7 @@ class App extends React.Component {
           <Route exact path="/profile/:userName" component={UserProfile} />
           <Route exact path="/adminHome" component={AdminHomePage} />
           <Route exact path="/mapView" component={MapView} />
+          <Route exact path="/createJob" component={CreateJob} />
         </Switch>
       </Router>
     );

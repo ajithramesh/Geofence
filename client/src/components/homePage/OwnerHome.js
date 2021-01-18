@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Button, Table } from "react-bootstrap";
 import * as sessionMgmt from "../../services/SessionHandler";
+import TopBar from "../TopBar";
+import history from "../../services/History";
 
 export default class OwnerHome extends Component {
     constructor(props) {
@@ -11,7 +13,7 @@ export default class OwnerHome extends Component {
     }
     componentDidMount() {
         let self = this
-        fetch('http://localhost:4000/' + sessionMgmt.getUserName() + '/pendingJobs', {
+        fetch('http://localhost:4000/jobs/' + sessionMgmt.getUserName() + '/pendingJobs', {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -77,8 +79,6 @@ export default class OwnerHome extends Component {
 
         return (
             <Container>
-                <TopBar userName={sessionMgmt.getUserName()}/>
-                <h2>Welcome Owner: {sessionMgmt.getUserName()} !!!</h2>
                 <Button variant="primary" onClick={() => history.push("/createJob")}>Create Job</Button>
             
                 <Table striped bordered hove>
