@@ -9,7 +9,6 @@ export default class AdminHomePage extends Component {
         super(props);
 
         this.state = {
-
             userList: []
         }
     }

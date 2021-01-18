@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, Router } from "react-router-dom";
-import HomePage from "./components/HomePage";
+import HomePage from "./components/homePage/HomePage";
 import Registration from "./components/login/RegistrationForm";
 import CustomLogin from "./components/login/CustomLogin";
 import history from "./services/History";
