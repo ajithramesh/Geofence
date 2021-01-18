@@ -19,6 +19,7 @@ app.use(function (req, res, next) {
 });
 
 const userController = require('./controller/user.controller')
+const jobController = require('./controller/job.controller')
 
 server = app.listen(process.env.PORT || 4000)
 const socket = require('socket.io')
@@ -33,4 +34,5 @@ io.on('connection', (socket) => {
     })
 
     userController(app, io);
+    jobController(app, io);
 })

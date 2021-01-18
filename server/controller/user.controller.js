@@ -54,15 +54,6 @@ module.exports = function(app, socket) {
         .catch(() => res.status(400).send("Failed to update"))
     })
 
-    app.get("/search/:keyword", (req, res) => {
-        userDao.getUserByKeyword(req.params.keyword.toLocaleLowerCase())
-        .then(users => {
-            const userNames = users.map(user => user.userName)
-            res.json(userNames)
-        })
-        .catch(() => res.status(400).send("Failed to find users"))
-    })
-
     app.delete("/users/:id", (req, res) => {
         userDao.deleteUserById(req.params.id)
         .then(() => res.send("Success"))
