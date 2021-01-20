@@ -4,7 +4,8 @@
   "description": "Express app to support server instance of the chat application",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "Ajith Babu",
   "license": "ISC",
