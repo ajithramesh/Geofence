@@ -15,7 +15,7 @@ export default class AdminHomePage extends Component {
 
     componentDidMount() {
         let self = this
-        fetch('http://localhost:4000/users/', {
+        fetch('https://nameless-beach-07628.herokuapp.com/users/', {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -28,7 +28,7 @@ export default class AdminHomePage extends Component {
 
     // deleteConversation = (conversatonId) => {
     //     let self = this
-    //     fetch('http://localhost:4000/conversations/' + conversatonId, {
+    //     fetch('https://nameless-beach-07628.herokuapp.com/conversations/' + conversatonId, {
     //     method: "DELETE",
     //     headers: {
     //       Accept: "application/json",
@@ -46,7 +46,7 @@ export default class AdminHomePage extends Component {
 
     deleteUser = (userId) => {
         let self = this;
-        fetch('http://localhost:4000/users/' + userId, {
+        fetch('https://nameless-beach-07628.herokuapp.com/users/' + userId, {
         method: "DELETE",
         headers: {
           Accept: "application/json",

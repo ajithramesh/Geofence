@@ -18,7 +18,7 @@ export default class WalkerHome extends Component {
 
     getAllJobs = () => {
         let self = this
-        fetch('http://localhost:4000/jobs', {
+        fetch('https://nameless-beach-07628.herokuapp.com/jobs', {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -31,7 +31,7 @@ export default class WalkerHome extends Component {
 
     acceptJob = (jobId) => {
         let self = this
-        fetch('http://localhost:4000/jobs/' + jobId, {
+        fetch('https://nameless-beach-07628.herokuapp.com/jobs/' + jobId, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -42,7 +42,7 @@ export default class WalkerHome extends Component {
       .then(job => {
           job.status = "ASSIGNED";
           job.walker = sessionMgmt.getUserName();
-          fetch('http://localhost:4000/jobs/' + jobId, {
+          fetch('https://nameless-beach-07628.herokuapp.com/jobs/' + jobId, {
                 method: "PUT",
                 headers: {
                 Accept: "application/json",

@@ -24,7 +24,7 @@ export default class CreateJob extends Component {
         newJob.status = "UNASSIGNED";
 
 
-        fetch('http://localhost:4000/jobs', {
+        fetch('https://nameless-beach-07628.herokuapp.com/jobs', {
             method: 'POST',
             headers: {
             'Accept': 'application/json',

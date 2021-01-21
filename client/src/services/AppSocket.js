@@ -3,7 +3,7 @@ import * as sessionMgmt from './SessionHandler';
 
 var chatSocket = null;
 if (chatSocket === null)
-        chatSocket = io('http://localhost:4000/');
+        chatSocket = io('https://nameless-beach-07628.herokuapp.com/');
 
 export function joinChat() {
     chatSocket.emit('JOINING', sessionMgmt.getUserName())

@@ -13,7 +13,7 @@ export default class OwnerHome extends Component {
     }
     componentDidMount() {
         let self = this
-        fetch('http://localhost:4000/jobs/' + sessionMgmt.getUserName() + '/pendingJobs', {
+        fetch('https://nameless-beach-07628.herokuapp.com/jobs/' + sessionMgmt.getUserName() + '/pendingJobs', {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -26,7 +26,7 @@ export default class OwnerHome extends Component {
 
     deleteJob = (jobId) => {
         let self = this;
-        fetch('http://localhost:4000/jobs/' + jobId, {
+        fetch('https://nameless-beach-07628.herokuapp.com/jobs/' + jobId, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
